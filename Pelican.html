@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+    <link rel="shortcut icon" href="theme/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="theme/img/favicon.ico" type="image/x-icon">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Mike Iapalucci" />
+<meta name="description" content="Tips on setting up a blog using Pelican" />
+<meta name="keywords" content="Pelican, Markdown">
+<meta property="og:site_name" content="mikeiapalucci.com"/>
+<meta property="og:title" content="Why I Chose Pelican for my Blog"/>
+<meta property="og:description" content="Tips on setting up a blog using Pelican"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./Pelican.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-12-07 00:00:00-05:00"/>
+<meta property="article:modified_time" content="2017-12-07 00:00:00-05:00"/>
+<meta property="article:author" content="./author/mike-iapalucci.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="Pelican"/>
+<meta property="article:tag" content="Markdown"/>
+<meta property="og:image" content="theme/img/profile.jpg">
+
+  <title>mikeiapalucci.com &ndash; Why I Chose Pelican for my Blog</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="theme/img/profile.jpg" alt="Mike Iapalucci" title="Mike Iapalucci">
+      </a>
+      <h2><a href=".">Mike Iapalucci</a></h2>
+
+<p>Ctrl+c: Living, learning and coding
+...with humility.</p>
+
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/mikeiapalucci/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/mjiapalucci" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/mikeiapalucci" target="_blank"><i class="fa fa-twitter"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="Pelican">Why I Chose Pelican for my Blog</h1>
+    <p>
+          Posted on Thu 07 December 2017 in <a href="./category/python.html">Python</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Welcome to my blog.  For my first post I thought I would explain why and how I created this site.  If you want to skip the personal background and just get to my tips on Pelican, jump down to Tips and Tricks.</p>
+<h3>Why not WordPress?</h3>
+<p>I recently created a blog site for work using Wordpress.com.  It is very easy to set up a site this way and there are lots of themes and options that you can use.</p>
+<p>I set that site up primarily as a way to test sending updates to a WordPress site using XML-RPC.  At the time we had a new client that required updates be sent to their site this way. Getting our own site set up was an added benefit.  XML-RPC is a way to connect remotely to a WordPress site.  It stands for XML Remote Procedure Call.  So I had to write a simple script that makes an http connection and sends an XML file using XML-RPC.  </p>
+<p>For our own site, I wrote a Python script to automate daily updates from JSON files.  This worked well except for the fact that I did not have a lot of control over the look and feel of the site aside from the features available in the theme I had chosen.</p>
+<p>A second issue with the WordPress site is that I noticed a lot of traffic coming from countries in Eastern Europe.  While I trust the folks at Wordpress to deal with security, you have to wonder why so many non-English speakers would be coming to the site.  I have since learned that enabling XML-RPC opens up your site to security issues including brute force attacks and denial of service attacks.  Hmm, maybe that's what all those Eastern Europeans were up to.</p>
+<h3>Choosing Pelican</h3>
+<p>I have been working mainly with Python for the last two years, so I wanted to use a technology that worked with Python.  I thought about learning PHP, but I really don't know Python well enough to start down the path of another language.  Maybe some day, but not now.</p>
+<p>Besides being written in Python, the other advantages with Pelican are:</p>
+<ul>
+<li>
+<p>Creates static HTML files - This makes security much less of an issue since there is no database or moving parts to interact with.</p>
+</li>
+<li>
+<p>Hosting for free on Github - Again the security is key here since there is no need to set up a host on a cloud provider.  Pelican is not the only way to do this, but it is one of the easiest to use if you want to use Python.  Free is pretty good too!</p>
+</li>
+<li>
+<p>There are tons of open source themes available based on Bootstrap - The one I use is called <a href="https://github.com/alexandrevicenzi/flex">Flex</a>.</p>
+</li>
+<li>
+<p>Easy to create your own Bootstrap theme - Something I will probably try in the future, but for now using a pre-made theme is a no brainer.</p>
+</li>
+</ul>
+<h2>Setting Up Pelican</h2>
+<p>There are a lot of resources available to help with setting up Pelican, so I am not going to go into too much detail on the basics.  Here are the ones that I used and found the most helpful.</p>
+<p><a href="docs.getpelican.com">Pelican Docs</a></p>
+<p><a href="https://www.fullstackpython.com/blog/generating-static-websites-pelican-jinja2-markdown.html">Full Stack Python</a></p>
+<p><a href="nafiulis.me/making-a-static-blog-with-pelican.html">Making a Static Blog with Pelican</a></p>
+<p><a href="http://igbt6.github.io/blog/how-to-setup-pelican-blog.html">How to set up Pelican blog</a></p>
+<p><a href="http://pbpython.com/pelican-config.html">Configuring Pelican Static Blog</a></p>
+<p>For tips on Markdown:</p>
+<p><a href="https://www.data-blogger.com/2017/11/24/markdown-reference/">Markdown Language Reference</a></p>
+<p><a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=7&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwium4zumOzXAhUBleAKHWJCCYAQFghAMAY&amp;url=https%3A%2F%2Fpypi.python.org%2Fpypi%2FReText&amp;usg=AOvVaw3O97taLf9Swix2PydhGSV_">ReText</a> (A Markdown editor built in Python)</p>
+<h2>Tips and Tricks</h2>
+<p><strong><em>Using a Different Theme</em></strong></p>
+<p>While it is really easy to get Pelican running (I use Ubuntu 16.04 LTS), my biggest issue was with changing the preset theme.</p>
+<p>There is a command line tool for managing themes in Pelican.  You can see a list of the installed themes using:</p>
+<p><code>pelican-themes -l</code></p>
+<p>To install a theme use:</p>
+<p><code>pelican-themes -i [theme-path]</code></p>
+<p>While I tried using this command, it didn't seem to make a difference with regard to what theme was used when generating the site.  What is most important is that what ever directory you put all of the theme files (by default this is called theme), you reference that directory when you generate the site.</p>
+<p>You can use Make to generate the site, but I choose to use the Python command that allows you to set the specific settings to use including the theme.</p>
+<p>The command is:</p>
+<p><code>pelican -s pelicanconf.py -o output -t [theme sub-directory] content</code></p>
+<p>Initially, I was confused with this command since the sub-directory containing the default theme is called "theme".</p>
+<p>You can copy all of your chosen theme's directories and files into the theme sub-directory or, as I did, give it another name and make sure it is under the main directory for your site.</p>
+<p>The file structure will look like this:</p>
+<div class="highlight"><pre><span></span><span class="err">project name</span>
+<span class="err">|    fabfile.py</span>
+<span class="err">|    Makefile</span>
+<span class="err">|    pelicanconf.py</span>
+<span class="err">|____content</span>
+<span class="err">|____output</span>
+<span class="err">|____theme</span>
+</pre></div>
+
+
+<p>Since I am using the Flex theme, I added another sub-directory named "Flex" and cloned the files from the theme's Github repo.  I wanted to keep the default theme in case I made a mistake.</p>
+<p>This led me to some confusion typing the following command:</p>
+<p><code>pelican -s pelicanconf.py -o output -t theme Flex content</code></p>
+<p>instead of:</p>
+<p><code>pelican -s pelicanconf.py -o output -t Flex content</code></p>
+<p>Of course I kept getting the default theme.  Maybe this was a newb mistake, but since I didn't get any error message with my incorrect command, it took me a while to figure this out.</p>
+<p><b>So either overwrite your new theme into the theme directory or point to your new theme's directory.  Don't do both!</b></p>
+<p><strong><em>Whether to Use the Pelican Development Server or Not</em></strong></p>
+<p>The first time I ran through the example from Full Stack Python I used Makefile to run the development server.  I found it to be a little confusing since you can't just Ctrl+C out of it.</p>
+<p>Using the regular production server was the easiest for me.  I would just switch between building the static HTML files with the Pelican command above and then the following command:</p>
+<p><code>python -m http.server</code></p>
+<p>This starts server as a local host on port 8000.  You just need to point your browser to localhost:8000.</p>
+<p>Two things to keep in mind when doing this:</p>
+<ol>
+<li>
+<p>Make sure you cd to the output sub-directory from your main directory.  You can start up the server in the main project name directory, but what you will see in your browser is your file directory, not your HTML files.</p>
+</li>
+<li>
+<p>Make sure to comment out the SITEURL setting in your pelicanconf.py file.  I found that I was not able to access updated HTML files from the local server in the browser if this line was not commented out.  I think this is due to the fact that I had RELATIVE_URLS = True.  Once I changed the setting to False, it worked fine. When you publish your site, it is advised that you set RELATIVE_URLS to True again and uncomment the SITEURL setting.</p>
+</li>
+</ol>
+<p>And that's it.  Overall, I think Pelican is a great way to create a static blog.  You can also use it to easily create any kind of static web site without dealing with adding the complexity and security issues of a CRUD site that connects to a database and requires more sophisticated hosting.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/pelican.html">Pelican</a>
+      <a href="./tag/markdown.html">Markdown</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Mike Iapalucci 2021 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " mikeiapalucci.com ",
+  "url" : ".",
+  "image": "theme/img/profile.jpg",
+  "description": "Ctrl+c: Living, learning and coding
+...with humility."
+}
+</script>
+</body>
+</html>
