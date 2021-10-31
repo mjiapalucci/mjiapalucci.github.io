@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+    <link rel="shortcut icon" href="theme/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="theme/img/favicon.ico" type="image/x-icon">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Mike Iapalucci" />
+<meta name="description" content="Import FCC 477 data into PowerBI." />
+<meta name="keywords" content="PowerBI, FCC, visualization">
+<meta property="og:site_name" content="mikeiapalucci.com"/>
+<meta property="og:title" content="Accessing FCC 477 Data with PowerBI"/>
+<meta property="og:description" content="Import FCC 477 data into PowerBI."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./accessing-fcc-477-data-with-powerbi.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-10-31 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/mike-iapalucci.html">
+<meta property="article:section" content="PowerBI"/>
+<meta property="article:tag" content="PowerBI"/>
+<meta property="article:tag" content="FCC"/>
+<meta property="article:tag" content="visualization"/>
+<meta property="og:image" content="theme/img/profile.jpg">
+
+  <title>mikeiapalucci.com &ndash; Accessing FCC 477 Data with PowerBI</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="theme/img/profile.jpg" alt="Mike Iapalucci" title="Mike Iapalucci">
+      </a>
+      <h2><a href=".">Mike Iapalucci</a></h2>
+
+<p>Learning from Data</p>
+
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/mikeiapalucci/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/mjiapalucci" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/mikeiapalucci" target="_blank"><i class="fa fa-twitter"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="https://github.com/mjiapalucci/mjiapalucci.github.io/tree/master/downloads">GitHub Files</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="accessing-fcc-477-data-with-powerbi">Accessing FCC 477 Data with PowerBI</h1>
+    <p>
+          Posted on Sun 31 October 2021 in <a href="./category/powerbi.html">PowerBI</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><img alt="Image: FCC GitHub Logo" src="./images/fcc_broadbandmap.png"></p>
+<p>In my last post, I demonstrated how to use the FCC 499 data to create a choropleth map.  In this post we'll look at another great FCC data set, Form 477 filers.</p>
+<p>The FCC requires all US broadband providers to provide data on where they provide broadband services at the census block level in the Form 477 twice a year on June 30 and December 31.  This year, due to Hurricane Ida, the FCC extended the June deadline to October 1.  The census block data is required of fixed providers as opposed to mobile providers.  We will be looking at the fixed providers data.  You can find more information about this filing at <a href="https://www.fcc.gov/general/broadband-deployment-data-fcc-form-477" title="FCC Site">Form 477</a>.</p>
+<p>This is a big data set.  The October 14, 2021 update has 75.3 million rows and 15 columns.  Given Excel's current limit of 1,048,576 rows, it is clear that we need another tool to analyze these data.  My first option was to pull it into a SQLite database.  This works well for doing some initial EDA and slicing out a subset of data that can then be analyzed in Excel or a Pandas DataFrame.  Then I thought, why not try PowerBI.  I can import directly from a web link.  Even with a PC with only 8 GB of memory, I was able to create a nice visualization that can easily be refreshed as the data is updated.</p>
+<h2>Data Ingestion</h2>
+<p>These data have the following columns (image taken from the FCC website):</p>
+<p><img alt="477 Data Dictionary" src="./images/477_data_dict.png" title="Data Dictionary"></p>
+<p>To get started, select the Web option from the Get data option from the PowerBI tool bar.  Enter the link for the CSV download from <a href="https://opendata.fcc.gov/Wireline/Fixed-Broadband-Deployment-Data-December-2020/hicn-aujz" title="Link to Data">Form 477 data link</a>.  This will pull in all the data into a table.  We'll call this table 477Data.  This will take a while depending on your internet connection given the amount of data.</p>
+<p>Once this is done, we need one more table to make interpreting the data a little easier.  In the data dictionary, you'll notice a column called Technology Code.  This provides the type of technology that the provider offers to supply the broadband connection.  As stated, this is a two digit numeric code.  To get the details about what these codes mean, we need to go to <a href="https://www.fcc.gov/general/technology-codes-used-fixed-broadband-deployment-data" title="Technology Code Desciptions">Technology Codes Used for Fixed  Broadband Deployment</a>.</p>
+<p>Let's pull these data in the same way we did with the first table.  This one will go much faster.  Use the Get data option from the tool bar, select Web again and enter the url from the link above.  Once the connection is established, you will be presented with a number of options to create tables from the page.  Select the first option from HTML Tables called Table 1.  This will parse all of the tech codes and their description from the HTML.  Select Load and rename this table TechCodes.</p>
+<p><img alt="Ingest Tech Codes" src="./images/GetdataTechCodes.PNG" title="Tech Codes"> </p>
+<p>Now we should have all the data we need to create our visualizations.  PowerBI is really amazing in the way it can figure out the data format from Web sources and easily parse out what you need whether it is CSV or HTML.</p>
+<h2>Linking the Tables</h2>
+<p>Before we do our visualizations, let's join the tech codes columns between our two tables.  The two columns to join are:</p>
+<p>477Data: Technology Code<br>
+TechCodes: Code</p>
+<p><img alt="Linked Tables" src="./images/LinkingTables.PNG" title="Linked Tables"></p>
+<h2>Visualizations</h2>
+<p>Now that all of our data is ingested and joined, we can build some visualizations.  The first one is a simple summary that shows the number of unique providers by state in a horizontal bar chart along with a table that summarizes the number of providers by technology type.  I have also included a bunch of slicers, a key PowerBI feature, that allows you to limit the data displayed by technology type as well as whether the service is provided to businesses and/or consumers.</p>
+<p><img alt="Viz1" src="./images/viz1.PNG" title="477 by State"></p>
+<p>Last is a choropleth map with the unique number of providers for each state.  Choropleth maps are not a strong feature for PowerBI.  As you see from the map, you can only create circles that represents the relative number of providers that are layered on top of the map.  Unlike a true choropleth that would fill in the boundaries of the state and present the relative value as a color on a spectrum.  You can't see it on this view of the map, but PowerBI doesn't know where to locate US territories by the two character state code used in these data.  Puerto Rico for example is located in Brazil.  If mapping is important, I recommend using another tool.</p>
+<p><img alt="Viz2" src="./images/viz2.PNG" title="Map of the US"></p>
+<p>That's it for this post.  Hope you enjoyed it and learned a little about the FCC 477 data set and PowerBI.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/powerbi.html">PowerBI</a>
+      <a href="./tag/fcc.html">FCC</a>
+      <a href="./tag/visualization.html">visualization</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Mike Iapalucci 2021 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " mikeiapalucci.com ",
+  "url" : ".",
+  "image": "theme/img/profile.jpg",
+  "description": "Learning from Data"
+}
+</script>
+</body>
+</html>
